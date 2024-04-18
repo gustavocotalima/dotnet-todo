@@ -6,7 +6,7 @@ namespace todo.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class TaskController(ITaskService taskService) : ControllerBase
+public class TaskController(ITaskService taskService) : BaseController
 {
     [HttpGet("{id}")]
     public async Task<IActionResult> GetTask(Guid id)
