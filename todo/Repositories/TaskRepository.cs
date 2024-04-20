@@ -4,29 +4,22 @@ namespace todo.Repositories;
 
 public class TaskRepository : ITaskRepository
 {
+    private readonly List<ITask> tasks = new();
+
     public Task<ITask> GetTask(Guid id)
     {
-        throw new NotImplementedException();
+        return Task.FromResult(tasks.FirstOrDefault(t => t.Id == id));
     }
 
     public Task<IEnumerable<ITask>> GetAllTasks()
     {
-        throw new NotImplementedException();
+        return Task.FromResult(tasks.AsEnumerable());
     }
 
     public Task AddTask(ITask task)
     {
-        throw new NotImplementedException();
+        tasks.Add(task);
+        return Task.CompletedTask;
     }
-
-    public Task UpdateTask(ITask task)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task DeleteTask(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-    
 }
+

@@ -2,37 +2,15 @@
 
 namespace todo;
 
-public class TaskService : ITaskService
+public class TaskService(ITaskRepository taskRepository) : ITaskService
 {
-    private readonly ITaskRepository _taskRepository;
-
-    public TaskService(ITaskRepository taskRepository)
-    {
-        _taskRepository = taskRepository;
-    }
-
     public Task<ITask> GetTask(Guid id)
     {
-        return _taskRepository.GetTask(id);
-    }
-
-    public Task<IEnumerable<ITask>> GetAllTasks()
-    {
-        return _taskRepository.GetAllTasks();
+        return taskRepository.GetTask(id);
     }
 
     public Task AddTask(ITask task)
     {
-        return _taskRepository.AddTask(task);
-    }
-
-    public Task UpdateTask(ITask task)
-    {
-        return _taskRepository.UpdateTask(task);
-    }
-
-    public Task DeleteTask(Guid id)
-    {
-        return _taskRepository.DeleteTask(id);
+        return taskRepository.AddTask(task);
     }
 }

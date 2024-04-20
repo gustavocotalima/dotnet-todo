@@ -8,15 +8,19 @@ namespace todo.Controllers;
 [Route("[controller]")]
 public class TaskController(ITaskService taskService) : BaseController
 {
-    [HttpGet("{id}")]
-    public async Task<IActionResult> GetTask(Guid id)
+    [HttpGet]
+    [Route("{id:guid:required}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    public async Task<IActionResult> GetTask([FromRoute] Guid id)
     {
         var task = await taskService.GetTask(id);
-
+        
         return Ok(task);
     }
 
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status201Created)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> CreateTask([FromBody] string description)
     {
         var task = new Task(description);
